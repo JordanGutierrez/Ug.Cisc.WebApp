@@ -1,0 +1,5 @@
+C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\bin\Release\Entidades.dll
+C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\bin\Release\Entidades.pdb
+C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\obj\Release\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\obj\Release\Entidades.dll
+C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\obj\Release\Entidades.pdb

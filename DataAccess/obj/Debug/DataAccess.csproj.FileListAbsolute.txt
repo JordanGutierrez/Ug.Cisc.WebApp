@@ -1,0 +1,7 @@
+c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\bin\Debug\DataAccess.dll
+c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\bin\Debug\DataAccess.pdb
+c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\bin\Debug\Entidades.dll
+c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\bin\Debug\Entidades.pdb
+c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\obj\Debug\DataAccess.dll
+c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\obj\Debug\DataAccess.pdb
