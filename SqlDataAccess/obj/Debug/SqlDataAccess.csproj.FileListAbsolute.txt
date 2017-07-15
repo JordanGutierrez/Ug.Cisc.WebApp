@@ -7,3 +7,12 @@ c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\SqlDataAccess\bin\D
 c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\SqlDataAccess\obj\Debug\SqlDataAccess.csprojResolveAssemblyReference.cache
 c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\SqlDataAccess\obj\Debug\SqlDataAccess.dll
 c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\SqlDataAccess\obj\Debug\SqlDataAccess.pdb
+D:\Titulacion\SqlDataAccess\bin\Debug\SqlDataAccess.dll
+D:\Titulacion\SqlDataAccess\bin\Debug\SqlDataAccess.pdb
+D:\Titulacion\SqlDataAccess\bin\Debug\DataAccess.dll
+D:\Titulacion\SqlDataAccess\bin\Debug\Entidades.dll
+D:\Titulacion\SqlDataAccess\bin\Debug\DataAccess.pdb
+D:\Titulacion\SqlDataAccess\bin\Debug\Entidades.pdb
+D:\Titulacion\SqlDataAccess\obj\Debug\SqlDataAccess.csprojResolveAssemblyReference.cache
+D:\Titulacion\SqlDataAccess\obj\Debug\SqlDataAccess.dll
+D:\Titulacion\SqlDataAccess\obj\Debug\SqlDataAccess.pdb

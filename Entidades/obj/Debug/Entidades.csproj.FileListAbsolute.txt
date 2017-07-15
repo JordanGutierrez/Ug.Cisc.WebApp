@@ -23,3 +23,28 @@ C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\bin\Debug
 C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\bin\Debug\es\System.Web.WebPages.resources.dll
 C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Jordan\Documents\Visual Studio 2015\Projects\WebApp\Entidades\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\Titulacion\Entidades\bin\Debug\Entidades.dll
+D:\Titulacion\Entidades\bin\Debug\Entidades.pdb
+D:\Titulacion\Entidades\bin\Debug\FoolproofValidation.dll
+D:\Titulacion\Entidades\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Titulacion\Entidades\bin\Debug\System.Web.Helpers.dll
+D:\Titulacion\Entidades\bin\Debug\System.Web.Mvc.dll
+D:\Titulacion\Entidades\bin\Debug\System.Web.Razor.dll
+D:\Titulacion\Entidades\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Titulacion\Entidades\bin\Debug\System.Web.WebPages.dll
+D:\Titulacion\Entidades\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Titulacion\Entidades\bin\Debug\System.Web.Helpers.xml
+D:\Titulacion\Entidades\bin\Debug\System.Web.Mvc.xml
+D:\Titulacion\Entidades\bin\Debug\System.Web.Razor.xml
+D:\Titulacion\Entidades\bin\Debug\System.Web.WebPages.xml
+D:\Titulacion\Entidades\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Titulacion\Entidades\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Titulacion\Entidades\bin\Debug\es\System.Web.Helpers.resources.dll
+D:\Titulacion\Entidades\bin\Debug\es\System.Web.Mvc.resources.dll
+D:\Titulacion\Entidades\bin\Debug\es\System.Web.Razor.resources.dll
+D:\Titulacion\Entidades\bin\Debug\es\System.Web.WebPages.resources.dll
+D:\Titulacion\Entidades\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+D:\Titulacion\Entidades\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+D:\Titulacion\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+D:\Titulacion\Entidades\obj\Debug\Entidades.dll
+D:\Titulacion\Entidades\obj\Debug\Entidades.pdb

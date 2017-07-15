@@ -9,9 +9,9 @@ namespace WebApp
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js",
-                "~/Scripts/moment-with-locales.js",
-                "~/Scripts/bootstrap-datetimepicker.js"));
+                        "~/Scripts/jquery-{version}.js"
+                        , "~/Scripts/bootstrap-datetimepicker/moment-with-locales.js"
+                        , "~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*",
@@ -21,24 +21,20 @@ namespace WebApp
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información. De este modo, estará
             // preparado para la producción y podrá utilizar la herramienta de compilación disponible en http://modernizr.com para seleccionar solo las pruebas que necesite.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                  "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootbox.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
+                      "~/Content/bootstrap-datetimepicker/bootstrap-datetimepicker.css",
                       "~/Content/DataTables/css/jquery.dataTables.min.css",
-                      "~/ Content/bootstrap-datetimepicker.css"));
+                      "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                         "~/Scripts/DataTables/jquery.dataTables.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/Master").Include(
-                        "~/Scripts/Master.js"));
-
         }
     }
 }

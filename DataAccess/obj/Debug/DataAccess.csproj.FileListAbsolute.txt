@@ -5,3 +5,10 @@ c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\bin\Debu
 c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\obj\Debug\DataAccess.dll
 c:\Users\Jordan\documents\visual studio 2015\Projects\WebApp\DataAccess\obj\Debug\DataAccess.pdb
+D:\Titulacion\DataAccess\bin\Debug\DataAccess.dll
+D:\Titulacion\DataAccess\bin\Debug\DataAccess.pdb
+D:\Titulacion\DataAccess\bin\Debug\Entidades.dll
+D:\Titulacion\DataAccess\bin\Debug\Entidades.pdb
+D:\Titulacion\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+D:\Titulacion\DataAccess\obj\Debug\DataAccess.dll
+D:\Titulacion\DataAccess\obj\Debug\DataAccess.pdb
