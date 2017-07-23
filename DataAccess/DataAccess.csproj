@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="Administracion\IPersona.cs" />
     <Compile Include="Administracion\IRol.cs" />
+    <Compile Include="Administracion\AppMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seguridad\ISeguridadDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">

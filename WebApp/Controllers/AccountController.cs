@@ -9,6 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApp.Models;
+using DataAccess.Seguridad;
+using SqlDataAccess.Seguridad;
+using System.Collections.Generic;
+using Entidades.Administracion;
 
 namespace WebApp.Controllers
 {
@@ -57,8 +61,15 @@ namespace WebApp.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if (!Request.IsAuthenticated)
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         //
@@ -66,29 +77,49 @@ namespace WebApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult  Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (!Request.IsAuthenticated)
             {
+
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                ISeguridadDAO securityDao = new SeguridadDAO(Request.UserHostAddress);
+                var transacciones = new List<string>();
+
+                var resultadoLogin = securityDao.authenticateUser(model.Email, model.Password, out transacciones);
+                if (resultadoLogin != "OK")
+                {
+                    ModelState.AddModelError("", resultadoLogin);
+                }
+                else
+                {
+                    //if (transacciones.Count > 0)
+                    //{
+                        var claims = GetClaims(model, Request, transacciones);
+                        if (claims != null)
+                        {
+                            SignIn(claims);
+                            Session["menu"] = null;
+                            return RedirectToLocal(returnUrl);
+                        //}
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "No tiene permisos para ingresar a la apliación");
+                    }
+                }
                 return View(model);
             }
-
-            // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
-            // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            else
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
-                    return View(model);
+                //Warning("Existe una sesión activa, debe cerrar sesión primero", true);
+                return RedirectToAction("Index", "Home");
             }
+
         }
 
         //
@@ -422,6 +453,32 @@ namespace WebApp.Controllers
 
             base.Dispose(disposing);
         }
+
+        private List<Claim> GetClaims(LoginViewModel model, HttpRequestBase request, List<string> roles)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, model.Email),
+                new Claim(AppIdentity.IPClaimType, request.UserHostAddress),
+                new Claim(ClaimTypes.Name, model.Email),
+                new Claim(AppIdentity.RolesClaimType, string.Join(",", roles))
+            };
+            return claims;
+        }
+
+        private void SignIn(IEnumerable<Claim> claims)
+        {
+
+            var claimsIdentity = new AppIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, claimsIdentity);
+
+
+            HttpContext.User = new AppPrincipal(AuthenticationManager.AuthenticationResponseGrant.Principal);
+
+        }
+
 
         #region Aplicaciones auxiliares
         // Se usa para la protección XSRF al agregar inicios de sesión externos

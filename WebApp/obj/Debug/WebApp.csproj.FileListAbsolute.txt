@@ -1,3 +1,4 @@
+D:\Titulacion\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache
 D:\Titulacion\WebApp\bin\ApplicationInsights.config
 D:\Titulacion\WebApp\bin\roslyn\csc.exe
 D:\Titulacion\WebApp\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -103,6 +104,5 @@ D:\Titulacion\WebApp\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
 D:\Titulacion\WebApp\bin\es\Microsoft.Owin.Security.Google.resources.dll
 D:\Titulacion\WebApp\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 D:\Titulacion\WebApp\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\Titulacion\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache
 D:\Titulacion\WebApp\obj\Debug\WebApp.dll
 D:\Titulacion\WebApp\obj\Debug\WebApp.pdb
