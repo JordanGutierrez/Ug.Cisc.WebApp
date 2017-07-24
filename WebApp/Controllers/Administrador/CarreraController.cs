@@ -9,77 +9,81 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers.Administrador
 {
-    public class PasanteController : Controller
+    public class CarreraController : Controller
     {
-        IPersonaDAO personaDAO = new PersonaDAO();
         ICarreraDAO carreraDAO = new CarreraDAO();
+        IFacultadDAO facultadDAO = new FacultadDAO();
 
-        // GET: Pasante
+        // GET: Carrera
         public ActionResult Index()
         {
             string mensaje = string.Empty;
-            List<Persona> personas = personaDAO.getAllPersona(ref mensaje);
+            List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
             if (mensaje != "OK")
                 return View();
             else
-                return View(personas.Where(p => p.RolID == 1));
+                return View(carreras);
         }
 
-        // GET: Pasante/Create
+        // GET: Carrera/Create
         public ActionResult Create()
         {
             string mensaje = string.Empty;
-            List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
-            Persona persona = new Persona();
-            persona.RolID = 1;
-            ViewBag.Carreras = carreras.Where(c => c.Estado);
-            return View(persona);
+            List<Facultad> facultades = facultadDAO.getAllFacultad(ref mensaje);
+            if (mensaje == "OK")
+            {
+                ViewBag.Facultades = facultades.Where(f => f.Estado);
+                return View();
+            }
+            else
+                return RedirectToAction("Index");
         }
 
-        // POST: Pasante/Create
+        // POST: Carrera/Create
         [HttpPost]
-        public ActionResult Create(Persona persona)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Carrera carrera)
         {
             try
             {
                 string mensaje = string.Empty;
-                personaDAO.insertPersona(persona, "@Admin", ref mensaje);
+                carreraDAO.insertCarrera(carrera, "@Admin", ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
                     return View();
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
-        // GET: Pasante/Edit/5
+        // GET: Carrera/Edit/5
         public ActionResult Edit(int id)
         {
-            Persona persona = null;
             string mensaje = string.Empty;
-            List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
-            persona = personaDAO.getPersona(id, ref mensaje);
-            ViewBag.Carreras = carreras.Where(c => c.Estado);
-            return View(persona);
+            Carrera carrera = carreraDAO.getCarrera(id, ref mensaje);
+            List<Facultad> facultades = facultadDAO.getAllFacultad(ref mensaje);
+            ViewBag.Facultades = facultades.Where(f => f.Estado);
+            return View(carrera);
         }
 
-        // POST: Pasante/Edit/5
+        // POST: Carrera/Edit/5
         [HttpPost]
-        public ActionResult Edit(Persona persona)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Carrera carrera)
         {
             try
             {
                 string mensaje = string.Empty;
-                personaDAO.updatePersona(persona, "@Admin", ref mensaje);
+                carreraDAO.updateCarrera(carrera, "@Admin", ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
                     return View();
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

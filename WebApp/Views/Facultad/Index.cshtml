@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Entidades.Administracion.Facultad>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Facultad")" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nueva Facultad</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","Facultad", new { id = item.FacultadID })" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

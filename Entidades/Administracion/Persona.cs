@@ -16,6 +16,7 @@ namespace Entidades.Administracion
         [DisplayName("Código")]
         public int PersonaID { get; set; }
 
+        [Required]
         public int RolID { get; set; }
 
         [Required(ErrorMessage = "El tipo de identificación es requerido")]
@@ -29,45 +30,46 @@ namespace Entidades.Administracion
 
         [Required(ErrorMessage = "El primer nombre es requerido")]
         [DisplayName("Primer Nombre")]
-        [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
+        [RegularExpression(@"^[A-Za-zÑñáéíóúÁÉÍÓÚ ]*$", ErrorMessage = "El primer nombre solo acepta caracteres alfabéticos")]
         [MaxLength(50, ErrorMessage ="Máximo 25 caracteres")]
         public string PrimerNombre { get; set; }
 
         [Required(ErrorMessage = "El segundo nombre es requerido")]
         [DisplayName("Segundo Nombre")]
-        [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
+        [RegularExpression(@"^[A-Za-zÑñáéíóúÁÉÍÓÚ ]*$", ErrorMessage = "El segundo nombre solo acepta caracteres alfabéticos")]
         [MaxLength(50, ErrorMessage = "Máximo 25 caracteres")]
         public string SegundoNombre { get; set; }
 
         [Required(ErrorMessage = "El apellido paterno es requerido")]
         [DisplayName("Apellido Paterno")]
-        [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
+        [RegularExpression(@"^[A-Za-zÑñáéíóúÁÉÍÓÚ ]*$", ErrorMessage = "El apellido paterno solo acepta caracteres alfabéticos")]
         [MaxLength(25, ErrorMessage = "Máximo 25 caracteres")]
         public string ApellidoPaterno { get; set; }
 
         [Required(ErrorMessage = "El apellido materno es requerido")]
         [DisplayName("Apellido Materno")]
-        [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
+        [RegularExpression(@"^[A-Za-zÑñáéíóúÁÉÍÓÚ ]*$", ErrorMessage = "El apellido materno solo acepta caracteres alfabéticos")]
         [MaxLength(50, ErrorMessage = "Máximo 25 caracteres")]
         public string ApellidoMaterno { get; set; }
 
         [Required(ErrorMessage = "La fecha de nacimiento es requerida")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayName("Fecha de Nacimiento")]
-        public DateTime FechaNacimineto { get; set; }
+        public Nullable<DateTime> FechaNacimineto { get; set; }
 
         [Required(ErrorMessage = "El correo institucional es requerido")]
         [DisplayName("Correo Institucional")]
         [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un Email válido")]
         public string CorreoInstitucional { get; set; }
 
-        [RequiredIf("TipoPersona", 1, ErrorMessage = "El correo personal es requerido")]
+        [RequiredIf("RolID", 1, ErrorMessage = "El correo personal es requerido")]
         [DisplayName("Correo Personal")]
         [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un Email válido")]
         public string CorreoPersonal { get; set; }
 
         [Required(ErrorMessage = "El número de celular es requerido")]
-        [DisplayName("Célular")]
+        [DisplayName("Celular")]
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "El número celular solo acepta caracteres numéricos")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "El número de celular debe tener 10 dígitos")]
         public string Celular { get; set; }
 

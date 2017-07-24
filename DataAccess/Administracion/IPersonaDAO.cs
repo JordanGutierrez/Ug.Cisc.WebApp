@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Administracion
 {
-    public interface IPersona
+    public interface IPersonaDAO
     {
         List<Persona> getAllPersona(ref string mensaje);
 

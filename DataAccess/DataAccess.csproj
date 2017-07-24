@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracion\IPersona.cs" />
+    <Compile Include="Administracion\ICarreraDAO.cs" />
+    <Compile Include="Administracion\IFacultadDAO.cs" />
+    <Compile Include="Administracion\IPersonaDAO.cs" />
     <Compile Include="Administracion\IRol.cs" />
     <Compile Include="Administracion\AppMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,7 +10,7 @@ using System.Data;
 
 namespace SqlDataAccess.Administracion
 {
-    public class PersonaDAO : IPersona
+    public class PersonaDAO : IPersonaDAO
     {
         ConsultasSQL sql = new ConsultasSQL();
 
@@ -91,16 +91,11 @@ namespace SqlDataAccess.Administracion
 
             try
             {
-                sql.AbrirConexion();
-                sql.EjecutaQuery();
+                sql.EjecutaQuery(ref mensaje);
             }
             catch (Exception ex)
             {
                 mensaje = ex.Message;
-            }
-            finally
-            {
-                sql.CerrarConexion();
             }
         }
 
@@ -121,12 +116,13 @@ namespace SqlDataAccess.Administracion
             sql.Comando.Parameters.AddWithValue("@CorreoInstitucional", persona.CorreoInstitucional);
             sql.Comando.Parameters.AddWithValue("@CorreoPersonal", persona.CorreoPersonal);
             sql.Comando.Parameters.AddWithValue("@CarreraID", persona.CarreraID);
+            sql.Comando.Parameters.AddWithValue("@Estado", persona.Estado);
             sql.Comando.Parameters.AddWithValue("@Usuario", usuario);
 
             try
             {
                 sql.AbrirConexion();
-                sql.EjecutaQuery();
+                sql.EjecutaQuery(ref mensaje);
             }
             catch (Exception ex)
             {

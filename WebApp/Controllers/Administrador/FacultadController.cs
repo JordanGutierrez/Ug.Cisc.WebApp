@@ -9,77 +9,69 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers.Administrador
 {
-    public class PasanteController : Controller
+    public class FacultadController : Controller
     {
-        IPersonaDAO personaDAO = new PersonaDAO();
-        ICarreraDAO carreraDAO = new CarreraDAO();
+        IFacultadDAO facultadDAO = new FacultadDAO();
 
-        // GET: Pasante
+        // GET: Facultad
         public ActionResult Index()
         {
             string mensaje = string.Empty;
-            List<Persona> personas = personaDAO.getAllPersona(ref mensaje);
+            List<Facultad> facultades = facultadDAO.getAllFacultad(ref mensaje);
             if (mensaje != "OK")
                 return View();
             else
-                return View(personas.Where(p => p.RolID == 1));
+                return View(facultades);
         }
 
-        // GET: Pasante/Create
+        // GET: Facultad/Create
         public ActionResult Create()
         {
-            string mensaje = string.Empty;
-            List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
-            Persona persona = new Persona();
-            persona.RolID = 1;
-            ViewBag.Carreras = carreras.Where(c => c.Estado);
-            return View(persona);
+            return View();
         }
 
-        // POST: Pasante/Create
+        // POST: Facultad/Create
         [HttpPost]
-        public ActionResult Create(Persona persona)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Facultad facultad)
         {
             try
             {
                 string mensaje = string.Empty;
-                personaDAO.insertPersona(persona, "@Admin", ref mensaje);
+                facultadDAO.insertFacultad(facultad, "@Admin",ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
                     return View();
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }
         }
 
-        // GET: Pasante/Edit/5
+        // GET: Facultad/Edit/5
         public ActionResult Edit(int id)
         {
-            Persona persona = null;
             string mensaje = string.Empty;
-            List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
-            persona = personaDAO.getPersona(id, ref mensaje);
-            ViewBag.Carreras = carreras.Where(c => c.Estado);
-            return View(persona);
+            Facultad facultad = facultadDAO.getFacultad(id, ref mensaje);
+            return View(facultad);
         }
 
-        // POST: Pasante/Edit/5
+        // POST: Facultad/Edit/5
         [HttpPost]
-        public ActionResult Edit(Persona persona)
+        public ActionResult Edit(int id, Facultad facultad)
         {
             try
             {
                 string mensaje = string.Empty;
-                personaDAO.updatePersona(persona, "@Admin", ref mensaje);
+                facultadDAO.updateFacultad(facultad, "@Admin", ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
                     return View();
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }

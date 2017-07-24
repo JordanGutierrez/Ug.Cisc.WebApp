@@ -51,16 +51,13 @@ namespace SqlDataAccess.Utils
             return retValue;  
         }
 
-        public string EjecutaQuery()
+        public void EjecutaQuery(ref string mensaje)
         {
-            string mensaje = string.Empty;
-            int retValue;
-
             try
             {
                 AbrirConexion();
                 Comando.Connection = _laConexion;
-                retValue = Comando.ExecuteNonQuery();
+                Comando.ExecuteNonQuery();
                 mensaje = "OK";
             }
             catch (SqlException ex)
@@ -75,7 +72,6 @@ namespace SqlDataAccess.Utils
             {
                 CerrarConexion();
             }
-            return mensaje;
         }
 
         public DataTable EjecutaDataTable(ref string mensaje)

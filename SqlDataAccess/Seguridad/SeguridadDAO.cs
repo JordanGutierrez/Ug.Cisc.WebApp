@@ -92,7 +92,7 @@ namespace SqlDataAccess.Seguridad
             sql = new ConsultasSQL();
             sql.Comando.CommandType = CommandType.StoredProcedure;
             sql.Comando.CommandText = "pa_getUsuario";
-            sql.Comando.Parameters.Add("@Alias", alias);
+            sql.Comando.Parameters.AddWithValue("@Alias", alias);
 
             try
             {

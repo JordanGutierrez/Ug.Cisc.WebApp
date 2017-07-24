@@ -200,6 +200,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Administrador\CarreraController.cs" />
+    <Compile Include="Controllers\Administrador\FacultadController.cs" />
     <Compile Include="Controllers\Administrador\PasanteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -522,6 +524,12 @@
     <Content Include="Views\Pasante\Index.cshtml" />
     <Content Include="Views\Pasante\Create.cshtml" />
     <Content Include="Views\Pasante\Edit.cshtml" />
+    <Content Include="Views\Carrera\Index.cshtml" />
+    <Content Include="Views\Facultad\Create.cshtml" />
+    <Content Include="Views\Facultad\Index.cshtml" />
+    <Content Include="Views\Facultad\Edit.cshtml" />
+    <Content Include="Views\Carrera\Create.cshtml" />
+    <Content Include="Views\Carrera\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

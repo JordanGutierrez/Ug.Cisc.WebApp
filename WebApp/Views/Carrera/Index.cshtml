@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Entidades.Administracion.Carrera>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de Carreras</h2>
+
+<p>
+    <a href="@Url.Action("Create","Carrera")" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nueva Carrera</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FacultadNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FacultadNombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","Carrera", new { id = item.CarreraID })" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
