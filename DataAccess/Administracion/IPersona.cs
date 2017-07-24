@@ -11,6 +11,10 @@ namespace DataAccess.Administracion
     {
         List<Persona> getAllPersona(ref string mensaje);
 
-        Persona getPersona(int id);
+        Persona getPersona(int id, ref string mensaje);
+
+        void insertPersona(Persona persona, string usuario, ref string mensaje);
+
+        void updatePersona(Persona persona, string usuario, ref string mensaje);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foolproof;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -15,90 +16,66 @@ namespace Entidades.Administracion
         [DisplayName("Código")]
         public int PersonaID { get; set; }
 
-        public int TipoPersona { get; set; }
+        public int RolID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El tipo de identificación es requerido")]
         [DisplayName("Tipo de Identificación")]
-        public int IdentificacionID { get; set; }
+        public int TipoIdentificacionID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El número de identificación es requerido")]
         [DisplayName("Número de identificación")]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "El número de identificación solo acepta caracteres numéricos")]
         public string NumeroIdentificacion { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El primer nombre es requerido")]
         [DisplayName("Primer Nombre")]
         [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
         [MaxLength(50, ErrorMessage ="Máximo 25 caracteres")]
         public string PrimerNombre { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El segundo nombre es requerido")]
         [DisplayName("Segundo Nombre")]
         [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
         [MaxLength(50, ErrorMessage = "Máximo 25 caracteres")]
         public string SegundoNombre { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El apellido paterno es requerido")]
         [DisplayName("Apellido Paterno")]
         [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
         [MaxLength(25, ErrorMessage = "Máximo 25 caracteres")]
         public string ApellidoPaterno { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El apellido materno es requerido")]
         [DisplayName("Apellido Materno")]
         [RegularExpression(@"^[a-zA-ZÑñ]*$", ErrorMessage = "Solo acepta caracteres alafabéticos")]
         [MaxLength(50, ErrorMessage = "Máximo 25 caracteres")]
         public string ApellidoMaterno { get; set; }
 
-        [Required(ErrorMessage = "La Fecha de Nacimiento es requerida")]
+        [Required(ErrorMessage = "La fecha de nacimiento es requerida")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayName("Fecha de Nacimiento")]
         public DateTime FechaNacimineto { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [DisplayName("Fecha de Registro")]
-        public DateTime FechaRegistro { get; set; }
-
-        [Required]
-        [DisplayName("Correo")]
+        [Required(ErrorMessage = "El correo institucional es requerido")]
+        [DisplayName("Correo Institucional")]
         [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un Email válido")]
-        public string Correo { get; set; }
+        public string CorreoInstitucional { get; set; }
 
+        [RequiredIf("TipoPersona", 1, ErrorMessage = "El correo personal es requerido")]
+        [DisplayName("Correo Personal")]
+        [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un Email válido")]
+        public string CorreoPersonal { get; set; }
+
+        [Required(ErrorMessage = "El número de celular es requerido")]
         [DisplayName("Célular")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "El número de celular debe tener 10 dígitos")]
         public string Celular { get; set; }
 
-        [Required(ErrorMessage = "La Fecha de Registro es requerida")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [DisplayName("Fecha Inicio Pasantías")]
-        public Nullable<DateTime> FechaInicioPasantias { get; set; }
-
-        [Required(ErrorMessage = "La Fecha de Registro es requerida")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [DisplayName("Fecha Fin de Pasantías")]
-        public Nullable<DateTime> FechaFinPasantias { get; set; }
-
-        [DisplayName("Tutor")]
-        public Nullable<int> TutorID { get; set; }
-
+        [Required(ErrorMessage = "La carrera es requerida")]
         [DisplayName("Carrera")]
-        public Nullable<int> CarreraID { get; set; }
+        public int CarreraID { get; set; }
 
-        [DisplayName("Supervisor")]
-        public Nullable<int> SupervisorID { get; set; }
-
-        [DisplayName("Cargo")]
-        [RegularExpression(@"^[a-zA-ZÑñ ]*$", ErrorMessage = "El cargo solo acepta caracteres alafabéticos")]
-        [MaxLength(50, ErrorMessage = "Máximo 25 caracteres")]
-        public string Cargo { get; set; }
-
-        [DisplayName("Departamento")]
-        public string Departamento { get; set; }
-
-        [DisplayName("Institucion")]
-        public Nullable<int> InstitucionID { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "El estado es requerido")]
         [DisplayName("Estado")]
         public bool Estado { get; set; }
 
@@ -106,9 +83,9 @@ namespace Entidades.Administracion
         {
             Persona persona = new Persona();
 
-            persona.PersonaID = int.Parse(dr["PersonaId"].ToString());
-            persona.TipoPersona = int.Parse(dr["PersonaId"].ToString());
-            persona.IdentificacionID = int.Parse(dr["Identificacion"].ToString());
+            persona.PersonaID = int.Parse(dr["PersonaID"].ToString());
+            persona.RolID = int.Parse(dr["RolID"].ToString());
+            persona.TipoIdentificacionID = int.Parse(dr["TipoIdentificacionID"].ToString());
             persona.NumeroIdentificacion = dr["NumeroIdentificacion"].ToString();
             persona.PrimerNombre = dr["PrimerNombre"].ToString();
             persona.SegundoNombre = dr["SegundoNombre"].ToString();
@@ -116,22 +93,9 @@ namespace Entidades.Administracion
             persona.ApellidoMaterno = dr["ApellidoMaterno"].ToString();
             persona.FechaNacimineto = DateTime.Parse(dr["FechaNacimiento"].ToString());
             persona.Celular = dr["Celular"].ToString();
-            persona.Correo = dr["Correo"].ToString();
-            persona.FechaRegistro = DateTime.Parse(dr["FechaRegistro"].ToString());
-            if(dr["FechaInicioPasantias"] != DBNull.Value)
-                persona.FechaInicioPasantias =  DateTime.Parse(dr["FechaInicioPasantias"].ToString());
-            if (dr["FechaFinPasantias"] != DBNull.Value)
-                persona.FechaFinPasantias = DateTime.Parse(dr["FechaFinPasantias"].ToString());
-            if (dr["TutorID"] != DBNull.Value)
-                persona.TutorID = int.Parse(dr["TutorID"].ToString());
-            if (dr["CarreraID"] != DBNull.Value)
-                persona.CarreraID = int.Parse(dr["CarreraID"].ToString());
-            if (dr["SupervisorID"] != DBNull.Value)
-                persona.SupervisorID = int.Parse(dr["SupervisorID"].ToString());
-            persona.Cargo = dr["Cargo"].ToString();
-            persona.Departamento = dr["Departamento"].ToString();
-            if (dr["InstitucionID"] != DBNull.Value)
-                persona.InstitucionID = int.Parse(dr["InstitucionID"].ToString());
+            persona.CorreoInstitucional = dr["CorreoInstitucional"].ToString();
+            persona.CorreoPersonal = dr["CorreoPersonal"].ToString();
+            persona.CarreraID = int.Parse(dr["CarreraID"].ToString());
             persona.Estado = bool.Parse(dr["Estado"].ToString());
 
             return persona;

@@ -1,45 +1,43 @@
-﻿using Entidades;
+﻿using DataAccess.Administracion;
+using Entidades.Administracion;
+using SqlDataAccess.Administracion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DataAccess.Administracion;
-using SqlDataAccess.Administracion;
 
 namespace WebApp.Controllers.Administrador
 {
-    public class RolController : Controller
+    public class PasanteController : Controller
     {
-        IRol rolDAO = new RolDAO();
+        IPersona personaDAO = new PersonaDAO();
 
-        // GET: Rol
+        // GET: Pasante
         public ActionResult Index()
         {
             string mensaje = string.Empty;
-            return View(rolDAO.getAllRol(ref mensaje));
+            List<Persona> personas = personaDAO.getAllPersona(ref mensaje);
+            if (mensaje != "OK")
+                return View();
+            else
+                return View(personas.Where(p => p.RolID == 1));
         }
 
-        // GET: Rol/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Rol/Create
+        // GET: Pasante/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
-        // POST: Rol/Create
+        // POST: Pasante/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -48,41 +46,22 @@ namespace WebApp.Controllers.Administrador
             }
         }
 
-        // GET: Rol/Edit/5
+        // GET: Pasante/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Persona persona = null;
+            string mensaje = string.Empty;
+            persona = personaDAO.getPersona(id, ref mensaje);
+            return View(persona);
         }
 
-        // POST: Rol/Edit/5
+        // POST: Pasante/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Rol/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Rol/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

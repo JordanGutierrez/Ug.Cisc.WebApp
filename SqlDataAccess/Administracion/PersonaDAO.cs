@@ -42,9 +42,100 @@ namespace SqlDataAccess.Administracion
             return personas;
         }
 
-        public Persona getPersona(int id)
+        public Persona getPersona(int id, ref string mensaje)
         {
-            throw new NotImplementedException();
+            Persona persona = new Persona();
+            sql = new ConsultasSQL();
+            sql.Comando.CommandType = CommandType.StoredProcedure;
+            sql.Comando.CommandText = "pa_getPersona";
+            sql.Comando.Parameters.AddWithValue("@PersonaID", id);
+
+            try
+            {
+                sql.AbrirConexion();
+                IDataReader reader = sql.EjecutaReader(ref mensaje);
+                while (reader.Read())
+                {
+                    persona = Persona.CreatePersonaFromDataRecord(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+            }
+            finally
+            {
+                sql.CerrarConexion();
+            }
+
+            return persona;
+        }
+
+        public void insertPersona(Persona persona, string usuario, ref string mensaje)
+        {
+            sql.Comando.CommandType = CommandType.StoredProcedure;
+            sql.Comando.CommandText = "pa_insertPersona";
+            sql.Comando.Parameters.AddWithValue("@RolID", persona.RolID);
+            sql.Comando.Parameters.AddWithValue("@TipoIdentificacionID", persona.TipoIdentificacionID);
+            sql.Comando.Parameters.AddWithValue("@NumeroIdentificacion", persona.NumeroIdentificacion);
+            sql.Comando.Parameters.AddWithValue("@PrimerNombre", persona.PrimerNombre);
+            sql.Comando.Parameters.AddWithValue("@SegundoNombre", persona.SegundoNombre);
+            sql.Comando.Parameters.AddWithValue("@ApellidoPaterno", persona.ApellidoPaterno);
+            sql.Comando.Parameters.AddWithValue("@ApellidoMaterno", persona.ApellidoMaterno);
+            sql.Comando.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimineto);
+            sql.Comando.Parameters.AddWithValue("@Celular", persona.Celular);
+            sql.Comando.Parameters.AddWithValue("@CorreoInstitucional", persona.CorreoInstitucional);
+            sql.Comando.Parameters.AddWithValue("@CorreoPersonal", persona.CorreoPersonal);
+            sql.Comando.Parameters.AddWithValue("@CarreraID", persona.CarreraID);
+            sql.Comando.Parameters.AddWithValue("@Usuario", usuario);
+
+            try
+            {
+                sql.AbrirConexion();
+                sql.EjecutaQuery();
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+            }
+            finally
+            {
+                sql.CerrarConexion();
+            }
+        }
+
+        public void updatePersona(Persona persona, string usuario, ref string mensaje)
+        {
+            sql.Comando.CommandType = CommandType.StoredProcedure;
+            sql.Comando.CommandText = "pa_updatePersona";
+            sql.Comando.Parameters.AddWithValue("@PersonaID", persona.PersonaID);
+            sql.Comando.Parameters.AddWithValue("@RolID", persona.RolID);
+            sql.Comando.Parameters.AddWithValue("@TipoIdentificacionID", persona.TipoIdentificacionID);
+            sql.Comando.Parameters.AddWithValue("@NumeroIdentificacion", persona.NumeroIdentificacion);
+            sql.Comando.Parameters.AddWithValue("@PrimerNombre", persona.PrimerNombre);
+            sql.Comando.Parameters.AddWithValue("@SegundoNombre", persona.SegundoNombre);
+            sql.Comando.Parameters.AddWithValue("@ApellidoPaterno", persona.ApellidoPaterno);
+            sql.Comando.Parameters.AddWithValue("@ApellidoMaterno", persona.ApellidoMaterno);
+            sql.Comando.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimineto);
+            sql.Comando.Parameters.AddWithValue("@Celular", persona.Celular);
+            sql.Comando.Parameters.AddWithValue("@CorreoInstitucional", persona.CorreoInstitucional);
+            sql.Comando.Parameters.AddWithValue("@CorreoPersonal", persona.CorreoPersonal);
+            sql.Comando.Parameters.AddWithValue("@CarreraID", persona.CarreraID);
+            sql.Comando.Parameters.AddWithValue("@Usuario", usuario);
+
+            try
+            {
+                sql.AbrirConexion();
+                sql.EjecutaQuery();
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+            }
+            finally
+            {
+                sql.CerrarConexion();
+            }
         }
     }
 }
