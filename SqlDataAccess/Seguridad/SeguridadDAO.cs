@@ -54,7 +54,7 @@ namespace SqlDataAccess.Seguridad
                         {
                             if (usuario.Clave == GetStringSha256Hash(password))
                             {
-                                transacciones = new List<string>(); ;// leerTransacciones(roles);
+                                transacciones = new List<string>() { "2200", "2201"}; ;// leerTransacciones(roles);
                             }
                             else
                                 mensaje = "La clave o contraseña es incorrecta";

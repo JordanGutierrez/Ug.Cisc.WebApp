@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administracion\AppPrincipal.cs" />
+    <Compile Include="Administracion\Carrera.cs" />
+    <Compile Include="Administracion\Facultad.cs" />
+    <Compile Include="Administracion\Institucion.cs" />
     <Compile Include="Administracion\Persona.cs" />
     <Compile Include="Administracion\Rol.cs" />
     <Compile Include="Administracion\AppIdentity.cs" />

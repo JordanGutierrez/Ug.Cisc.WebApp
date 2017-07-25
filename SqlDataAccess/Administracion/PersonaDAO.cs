@@ -23,7 +23,6 @@ namespace SqlDataAccess.Administracion
 
             try
             {
-                sql.AbrirConexion();
                 IDataReader reader = sql.EjecutaReader(ref mensaje);
                 while (reader.Read())
                 {
@@ -33,10 +32,6 @@ namespace SqlDataAccess.Administracion
             catch (Exception ex)
             {
                 mensaje = ex.Message;
-            }
-            finally
-            {
-                sql.CerrarConexion();
             }
 
             return personas;
@@ -52,7 +47,6 @@ namespace SqlDataAccess.Administracion
 
             try
             {
-                sql.AbrirConexion();
                 IDataReader reader = sql.EjecutaReader(ref mensaje);
                 while (reader.Read())
                 {
@@ -62,10 +56,6 @@ namespace SqlDataAccess.Administracion
             catch (Exception ex)
             {
                 mensaje = ex.Message;
-            }
-            finally
-            {
-                sql.CerrarConexion();
             }
 
             return persona;
@@ -121,16 +111,11 @@ namespace SqlDataAccess.Administracion
 
             try
             {
-                sql.AbrirConexion();
                 sql.EjecutaQuery(ref mensaje);
             }
             catch (Exception ex)
             {
                 mensaje = ex.Message;
-            }
-            finally
-            {
-                sql.CerrarConexion();
             }
         }
     }

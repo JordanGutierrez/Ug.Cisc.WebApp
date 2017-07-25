@@ -98,15 +98,15 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    //if (transacciones.Count > 0)
-                    //{
+                    if (transacciones.Count > 0)
+                    {
                         var claims = GetClaims(model, Request, transacciones);
                         if (claims != null)
                         {
                             SignIn(claims);
                             Session["menu"] = null;
                             return RedirectToLocal(returnUrl);
-                        //}
+                        }
                     }
                     else
                     {

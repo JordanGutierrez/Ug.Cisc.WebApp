@@ -59,12 +59,12 @@ namespace Entidades.Administracion
 
         [Required(ErrorMessage = "El correo institucional es requerido")]
         [DisplayName("Correo Institucional")]
-        [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un Email válido")]
+        [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un correo válido")]
         public string CorreoInstitucional { get; set; }
 
         [RequiredIf("RolID", 1, ErrorMessage = "El correo personal es requerido")]
         [DisplayName("Correo Personal")]
-        [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un Email válido")]
+        [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un correo válido")]
         public string CorreoPersonal { get; set; }
 
         [Required(ErrorMessage = "El número de celular es requerido")]
@@ -77,7 +77,6 @@ namespace Entidades.Administracion
         [DisplayName("Carrera")]
         public int CarreraID { get; set; }
 
-        [Required(ErrorMessage = "El estado es requerido")]
         [DisplayName("Estado")]
         public bool Estado { get; set; }
 

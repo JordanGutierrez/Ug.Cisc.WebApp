@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers.Administrador
 {
-    public class PasanteController : Controller
+    public class PasanteController : BaseController
     {
         IPersonaDAO personaDAO = new PersonaDAO();
         ICarreraDAO carreraDAO = new CarreraDAO();
@@ -43,7 +43,7 @@ namespace WebApp.Controllers.Administrador
             try
             {
                 string mensaje = string.Empty;
-                personaDAO.insertPersona(persona, "@Admin", ref mensaje);
+                personaDAO.insertPersona(persona, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
@@ -73,7 +73,7 @@ namespace WebApp.Controllers.Administrador
             try
             {
                 string mensaje = string.Empty;
-                personaDAO.updatePersona(persona, "@Admin", ref mensaje);
+                personaDAO.updatePersona(persona, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else

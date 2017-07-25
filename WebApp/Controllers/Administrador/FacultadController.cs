@@ -9,11 +9,12 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers.Administrador
 {
-    public class FacultadController : Controller
+    public class FacultadController : BaseController
     {
         IFacultadDAO facultadDAO = new FacultadDAO();
 
         // GET: Facultad
+        [AppAuthorize("2200")]
         public ActionResult Index()
         {
             string mensaje = string.Empty;
@@ -25,6 +26,7 @@ namespace WebApp.Controllers.Administrador
         }
 
         // GET: Facultad/Create
+        [AppAuthorize("2201")]
         public ActionResult Create()
         {
             return View();
@@ -38,7 +40,7 @@ namespace WebApp.Controllers.Administrador
             try
             {
                 string mensaje = string.Empty;
-                facultadDAO.insertFacultad(facultad, "@Admin",ref mensaje);
+                facultadDAO.insertFacultad(facultad, GetApplicationUser(),ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
@@ -60,12 +62,13 @@ namespace WebApp.Controllers.Administrador
 
         // POST: Facultad/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Facultad facultad)
         {
             try
             {
                 string mensaje = string.Empty;
-                facultadDAO.updateFacultad(facultad, "@Admin", ref mensaje);
+                facultadDAO.updateFacultad(facultad, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
