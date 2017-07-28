@@ -540,6 +540,7 @@
     <Content Include="Views\Institucion\Index.cshtml" />
     <Content Include="Views\Institucion\Create.cshtml" />
     <Content Include="Views\Institucion\Edit.cshtml" />
+    <Content Include="Views\Shared\_Master.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

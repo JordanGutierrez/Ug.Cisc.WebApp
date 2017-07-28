@@ -24,14 +24,10 @@ namespace WebApp
                   "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/bootbox.min.js"));
+                      "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/bootstrap-datetimepicker/bootstrap-datetimepicker.css",
-                      "~/Content/DataTables/css/jquery.dataTables.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap-datetimepicker/bootstrap-datetimepicker.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                         "~/Scripts/DataTables/jquery.dataTables.min.js"));
