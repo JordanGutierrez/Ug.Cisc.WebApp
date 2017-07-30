@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebApp.Controllers.Administrador
+namespace WebApp.Controllers
 {
     public class TutorController : BaseController
     {
@@ -84,5 +84,30 @@ namespace WebApp.Controllers.Administrador
                 return View();
             }
         }
+
+        public ActionResult Tutores()
+        {
+            string mensaje = string.Empty;
+            List<Persona> personas = personaDAO.getAllPersona(ref mensaje);
+            if (mensaje != "OK")
+                return View();
+            else
+                return PartialView("_Tutores", personas.Where(p => p.RolID == 2));
+        }
+
+        public JsonResult ConsultarTutor(int id)
+        {
+            try
+            {
+                string mensaje = string.Empty;
+                var persona = personaDAO.getPersona(id, ref mensaje);
+                return Json(new { persona = persona, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { mensaje = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

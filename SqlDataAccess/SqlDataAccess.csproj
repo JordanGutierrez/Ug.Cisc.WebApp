@@ -45,6 +45,7 @@
     <Compile Include="Administracion\FacultadDAO.cs" />
     <Compile Include="Administracion\InstitucionDAO.cs" />
     <Compile Include="Administracion\PersonaDAO.cs" />
+    <Compile Include="Administracion\ProcesoDAO.cs" />
     <Compile Include="Administracion\RolDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\SeguridadDAO.cs" />

@@ -28,7 +28,7 @@ namespace Entidades.Administracion
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "El estado es requerido")]
-        [DisplayName("Estado")]
+        [DisplayName("Activo")]
         public bool Estado { get; set; }
 
         public static Carrera CreateCarreraFromDataRecord(IDataRecord dr)

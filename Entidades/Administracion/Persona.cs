@@ -77,7 +77,7 @@ namespace Entidades.Administracion
         [DisplayName("Carrera")]
         public int CarreraID { get; set; }
 
-        [DisplayName("Estado")]
+        [DisplayName("Activo")]
         public bool Estado { get; set; }
 
         public static Persona CreatePersonaFromDataRecord(IDataRecord dr)

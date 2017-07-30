@@ -20,7 +20,7 @@ namespace Entidades.Administracion
         [RegularExpression(@"^[A-Za-zÑñáéíóúÁÉÍÓÚ ]*$", ErrorMessage = "La razón social solo acepta caracteres alfabéticos")]
         public string RazonSocial { get; set; }
 
-        [Required(ErrorMessage = "La RUC es requerido")]
+        [Required(ErrorMessage = "El RUC es requerido")]
         [DisplayName("RUC")]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "El RUC solo acepta caracteres numéricos")]
         public string Ruc { get; set; }
@@ -30,7 +30,7 @@ namespace Entidades.Administracion
         [RegularExpression(@"^[A-Za-zÑñáéíóúÁÉÍÓÚ ]*$", ErrorMessage = "El representante legal solo acepta caracteres alfabéticos")]
         public string RepresentanteLegal { get; set; }
 
-        [Required(ErrorMessage = "La dirección es requerido")]
+        [Required(ErrorMessage = "La dirección es requerida")]
         [DisplayName("Dirección")]
         [RegularExpression(@"^[A-Za-zÑñáéíóúÁÉÍÓÚ ]*$", ErrorMessage = "La dirección solo acepta caracteres alfabéticos")]
         public string Direccion { get; set; }
@@ -45,7 +45,7 @@ namespace Entidades.Administracion
         [RegularExpression(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-‌​]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$", ErrorMessage = "Debe ingresar un correo válido")]
         public string Correo { get; set; }
 
-        [DisplayName("Estado")]
+        [DisplayName("Activo")]
         public bool Estado { get; set; }
 
         public static Institucion CreateInstitucionFromDataRecord(IDataRecord dr)

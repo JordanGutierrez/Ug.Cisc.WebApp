@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebApp.Controllers.Administrador
+namespace WebApp.Controllers
 {
     public class InstitucionController : BaseController
     {
@@ -74,6 +74,31 @@ namespace WebApp.Controllers.Administrador
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult Instituciones()
+        {
+            string mensaje = string.Empty;
+            List<Institucion> instituciones = institucionDAO.getAllInstitucion(ref mensaje);
+            if (mensaje != "OK")
+                return View();
+            else
+                return PartialView("_Instituciones", instituciones.Where(p => p.Estado));
+        }
+
+        [HttpPost]
+        public JsonResult ConsultarInstitucion(int id)
+        {
+            try
+            {
+                string mensaje = string.Empty;
+                var institucion = institucionDAO.getInstitucion(id, ref mensaje);
+                return Json(new { institucion = institucion, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { mensaje = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
     }

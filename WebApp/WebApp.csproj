@@ -200,15 +200,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Administrador\BaseController.cs" />
-    <Compile Include="Controllers\Administrador\CarreraController.cs" />
-    <Compile Include="Controllers\Administrador\FacultadController.cs" />
-    <Compile Include="Controllers\Administrador\InstitucionController.cs" />
-    <Compile Include="Controllers\Administrador\PasanteController.cs" />
-    <Compile Include="Controllers\Administrador\TutorController.cs" />
     <Compile Include="Controllers\AppAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CarreraController.cs" />
+    <Compile Include="Controllers\FacultadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstitucionController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PasanteController.cs" />
+    <Compile Include="Controllers\ProcesoController.cs" />
+    <Compile Include="Controllers\TutorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -488,6 +489,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Layout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Proceso.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -533,7 +535,6 @@
     <Content Include="Views\Facultad\Index.cshtml" />
     <Content Include="Views\Facultad\Edit.cshtml" />
     <Content Include="Views\Carrera\Create.cshtml" />
-    <Content Include="Views\Carrera\Edit.cshtml" />
     <Content Include="Views\Tutor\Index.cshtml" />
     <Content Include="Views\Tutor\Create.cshtml" />
     <Content Include="Views\Tutor\Edit.cshtml" />
@@ -541,6 +542,12 @@
     <Content Include="Views\Institucion\Create.cshtml" />
     <Content Include="Views\Institucion\Edit.cshtml" />
     <Content Include="Views\Shared\_Master.cshtml" />
+    <Content Include="Views\Carrera\Edit.cshtml" />
+    <Content Include="Views\Proceso\Index.cshtml" />
+    <Content Include="Views\Proceso\Create.cshtml" />
+    <Content Include="Views\Shared\_Pasantes.cshtml" />
+    <Content Include="Views\Shared\_Tutores.cshtml" />
+    <Content Include="Views\Shared\_Instituciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

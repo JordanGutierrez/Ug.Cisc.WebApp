@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebApp.Controllers.Administrador
+namespace WebApp.Controllers
 {
     public class PasanteController : BaseController
     {
@@ -82,6 +82,30 @@ namespace WebApp.Controllers.Administrador
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult Pasantes()
+        {
+            string mensaje = string.Empty;
+            List<Persona> personas = personaDAO.getAllPersona(ref mensaje);
+            if (mensaje != "OK")
+                return View();
+            else
+                return PartialView("_Pasantes", personas.Where(p => p.RolID == 1));
+        }
+
+        public JsonResult ConsultarPasante(int id)
+        {
+            try
+            {
+                string mensaje = string.Empty;
+                var persona = personaDAO.getPersona(id, ref mensaje);
+                return Json(new { persona = persona, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { mensaje = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
     }

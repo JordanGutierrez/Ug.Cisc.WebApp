@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebApp.Controllers.Administrador
+namespace WebApp.Controllers
 {
     public class CarreraController : BaseController
     {
