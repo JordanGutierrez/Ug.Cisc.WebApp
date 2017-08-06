@@ -83,7 +83,7 @@ namespace Entidades.Administracion
 
             proceso.ProcesoID = int.Parse(dr["ProcesoID"].ToString());
             proceso.PasantiaID = int.Parse(dr["PasantiaID"].ToString());
-            proceso.Pasantia = dr["Pasantia"].ToString();
+            proceso.Pasantia = dr["Nombre"].ToString();
             proceso.PasanteID = int.Parse(dr["PasanteID"].ToString());
             proceso.Pasante = dr["Pasante"].ToString();
             proceso.TutorID = int.Parse(dr["TutorID"].ToString());

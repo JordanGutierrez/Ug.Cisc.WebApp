@@ -77,6 +77,10 @@ namespace Entidades.Administracion
         [DisplayName("Carrera")]
         public int CarreraID { get; set; }
 
+        //[Required(ErrorMessage = "La foto es requerida")]
+        [DisplayName("Foto")]
+        public byte[] Foto { get; set; }
+
         [DisplayName("Activo")]
         public bool Estado { get; set; }
 
@@ -97,6 +101,9 @@ namespace Entidades.Administracion
             persona.CorreoInstitucional = dr["CorreoInstitucional"].ToString();
             persona.CorreoPersonal = dr["CorreoPersonal"].ToString();
             persona.CarreraID = int.Parse(dr["CarreraID"].ToString());
+            if(dr["Foto"] != DBNull.Value)
+                persona.Foto = (byte[])(dr["Foto"]);
+            
             persona.Estado = bool.Parse(dr["Estado"].ToString());
 
             return persona;

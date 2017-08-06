@@ -16,5 +16,7 @@ namespace DataAccess.Administracion
         void insertPersona(Persona persona, string usuario, ref string mensaje);
 
         void updatePersona(Persona persona, string usuario, ref string mensaje);
+
+        void updateFotoPersona(int personaID, byte[] foto, string usuario, ref string mensaje);
     }
 }

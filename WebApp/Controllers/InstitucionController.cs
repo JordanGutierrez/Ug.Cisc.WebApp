@@ -84,7 +84,7 @@ namespace WebApp.Controllers
             if (mensaje != "OK")
                 return View();
             else
-                return PartialView("_Instituciones", instituciones.Where(p => p.Estado));
+                return PartialView("_Instituciones", instituciones.Where(p => p.Estado && p.Estado));
         }
 
         [HttpPost]

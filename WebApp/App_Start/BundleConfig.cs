@@ -27,10 +27,16 @@ namespace WebApp
                       "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-datetimepicker/bootstrap-datetimepicker.css"));
+                "~/Content/bootstrap-fileinput/css/fileinput.min.css",
+                "~/Content/bootstrap-datetimepicker/bootstrap-datetimepicker.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                         "~/Scripts/DataTables/jquery.dataTables.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/fileUpload").Include(
+            "~/Scripts/fileinput.min.js",
+            "~/Scripts/locales/es.js"));
+
         }
     }
 }

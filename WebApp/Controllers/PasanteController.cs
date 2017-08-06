@@ -3,6 +3,8 @@ using Entidades.Administracion;
 using SqlDataAccess.Administracion;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,7 @@ namespace WebApp.Controllers
     {
         IPersonaDAO personaDAO = new PersonaDAO();
         ICarreraDAO carreraDAO = new CarreraDAO();
+        public string Descrimage { get; set; }
 
         // GET: Pasante
         public ActionResult Index()
@@ -85,6 +88,69 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult Foto(string id)
+        {
+            var file = Request.Files[0];
+            Descrimage = file.FileName;
+            string mensaje = string.Empty;
+            try
+            {
+                //if (Request.IsAuthenticated)
+                //{
+                    //if (GetApplicationUser().CodCandidato == id)
+                    //{
+                        if (Descrimage.Length <= 128)
+                           personaDAO.updateFotoPersona(int.Parse(id), ConvertToBytes(file), GetApplicationUser(), ref mensaje);
+                    //}
+
+                //}
+                return Json(new { Message = "ok"});
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Message =  ex.Message });
+            }
+        }
+
+        public ActionResult Image(string id, string random)
+        {
+            byte[] cover;
+            string mensaje = string.Empty;
+            try
+            {
+                var persona = personaDAO.getPersona(int.Parse(id), ref mensaje);
+                cover = persona.Foto;
+            }
+            catch
+            {
+                cover = null;
+            }
+
+
+            if (cover == null || cover.Length == 0)
+                cover = System.IO.File.ReadAllBytes(Server.MapPath(ConfigurationManager.AppSettings["GenericProfilePic"]));
+
+            return File(cover, "image/png");
+
+        }
+
+
+        //UTILIDADES
+        public byte[] ConvertToBytes(HttpPostedFileBase image)
+        {
+            byte[] imageBytes = null;
+
+            var reader = new BinaryReader(image.InputStream);
+
+            imageBytes = reader.ReadBytes((int)image.ContentLength);
+
+            return imageBytes;
+
+        }
+
+
+
         public ActionResult Pasantes()
         {
             string mensaje = string.Empty;
@@ -92,7 +158,7 @@ namespace WebApp.Controllers
             if (mensaje != "OK")
                 return View();
             else
-                return PartialView("_Pasantes", personas.Where(p => p.RolID == 1));
+                return PartialView("_Pasantes", personas.Where(p => p.RolID == 1 && p.Estado));
         }
 
         public JsonResult ConsultarPasante(int id)

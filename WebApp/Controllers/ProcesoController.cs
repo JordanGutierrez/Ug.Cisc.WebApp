@@ -1,6 +1,8 @@
 ﻿using DataAccess.Administracion;
+using DataAccess.Catalogos;
 using Entidades.Administracion;
 using SqlDataAccess.Administracion;
+using SqlDataAccess.Catalogos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,10 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class ProcesoController : Controller
+    public class ProcesoController : BaseController
     {
         IProcesoDAO procesoDAO = new ProcesoDAO();
+        IPasantiaDAO pasantiaDAO = new PasantiaDAO();
 
         // GET: Proceso
         public ActionResult Index()
@@ -27,22 +30,34 @@ namespace WebApp.Controllers
         // GET: Proceso/Create
         public ActionResult Create()
         {
+            string mensaje = string.Empty;
+            ViewBag.Pasantias = pasantiaDAO.getAllPasantia(ref mensaje);
             return View();
         }
 
         // POST: Proceso/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Proceso proceso)
         {
+            string mensaje = string.Empty;
+            ViewBag.Pasantias = pasantiaDAO.getAllPasantia(ref mensaje);
+
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                //int x = int.Parse("h");
+                mensaje = string.Empty;
+                procesoDAO.insertProceso(proceso, GetApplicationUser(), ref mensaje);
+                if (mensaje == "OK")
+                    return RedirectToAction("Index");
+                else
+                {
+                    return View(proceso);
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(proceso);
             }
         }
 

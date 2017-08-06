@@ -42,6 +42,13 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="col-md-6">
+
+                                <input type="file" id="Foto" name="Foto" class="file-loading" />
+                            </div>
+                            </div>
+
+                        <div class="form-group">
                             @Html.LabelFor(model => model.PrimerNombre, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-6">
                                 @Html.EditorFor(model => model.PrimerNombre, new { htmlAttributes = new { @class = "form-control" } })
@@ -147,4 +154,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script src="../../Scripts/Persona.js"></script>
+
 }

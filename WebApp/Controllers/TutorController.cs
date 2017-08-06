@@ -92,7 +92,7 @@ namespace WebApp.Controllers
             if (mensaje != "OK")
                 return View();
             else
-                return PartialView("_Tutores", personas.Where(p => p.RolID == 2));
+                return PartialView("_Tutores", personas.Where(p => p.RolID == 2 && p.Estado));
         }
 
         public JsonResult ConsultarTutor(int id)

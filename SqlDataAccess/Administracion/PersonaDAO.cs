@@ -118,5 +118,23 @@ namespace SqlDataAccess.Administracion
                 mensaje = ex.Message;
             }
         }
+
+        public void updateFotoPersona(int personaID, byte[] foto, string usuario, ref string mensaje)
+        {
+            sql.Comando.CommandType = CommandType.StoredProcedure;
+            sql.Comando.CommandText = "pa_updateFotoPersona";
+            sql.Comando.Parameters.AddWithValue("@PersonaID", personaID);
+            sql.Comando.Parameters.AddWithValue("@Foto", foto);
+            sql.Comando.Parameters.AddWithValue("@Usuario", usuario);
+
+            try
+            {
+                sql.EjecutaQuery(ref mensaje);
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+            }
+        }
     }
 }
