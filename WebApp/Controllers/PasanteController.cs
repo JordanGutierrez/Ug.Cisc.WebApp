@@ -101,7 +101,7 @@ namespace WebApp.Controllers
                     //if (GetApplicationUser().CodCandidato == id)
                     //{
                         if (Descrimage.Length <= 128)
-                           personaDAO.updateFotoPersona(int.Parse(id), ConvertToBytes(file), GetApplicationUser(), ref mensaje);
+                           personaDAO.updateFotoPersona(int.Parse(id), Utils.Utils.ConvertToBytes(file), GetApplicationUser(), ref mensaje);
                     //}
 
                 //}
@@ -127,29 +127,11 @@ namespace WebApp.Controllers
                 cover = null;
             }
 
-
             if (cover == null || cover.Length == 0)
                 cover = System.IO.File.ReadAllBytes(Server.MapPath(ConfigurationManager.AppSettings["GenericProfilePic"]));
 
             return File(cover, "image/png");
-
         }
-
-
-        //UTILIDADES
-        public byte[] ConvertToBytes(HttpPostedFileBase image)
-        {
-            byte[] imageBytes = null;
-
-            var reader = new BinaryReader(image.InputStream);
-
-            imageBytes = reader.ReadBytes((int)image.ContentLength);
-
-            return imageBytes;
-
-        }
-
-
 
         public ActionResult Pasantes()
         {
