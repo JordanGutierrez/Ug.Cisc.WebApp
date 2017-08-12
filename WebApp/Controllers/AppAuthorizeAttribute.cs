@@ -35,25 +35,16 @@ namespace WebApp.Controllers
             var roles = aux.Value;
 
             var rolesList = roles.Split(',').ToList();
-
-            //var ban = int.Parse(ConfigurationManager.AppSettings.Get("FrameworkSeguridadIntegrated"));
-            //if (ban == 1)
-            //{
-                if (rolesList.Any(r => { return r == rol; }))
-                {
-                    base.OnAuthorization(filterContext);
-                }
-                else
-                {
-                    HandleUnauthorizedRequest(filterContext);
-                }
-
+            if (rolesList.Any(r => { return r == rol; }))
+            {
                 base.OnAuthorization(filterContext);
-            //}
-            //else
-            //{
-            //    return;
-            //}
+            }
+            else
+            {
+                HandleUnauthorizedRequest(filterContext);
+            }
+
+            base.OnAuthorization(filterContext);
         }
     }
 }

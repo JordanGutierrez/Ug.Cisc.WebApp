@@ -14,7 +14,7 @@ namespace WebApp.Controllers
         IFacultadDAO facultadDAO = new FacultadDAO();
 
         // GET: Facultad
-        //[AppAuthorize("2200")]
+        [AppAuthorize("00002")]
         public ActionResult Index()
         {
             string mensaje = string.Empty;

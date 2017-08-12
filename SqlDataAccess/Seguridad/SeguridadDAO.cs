@@ -9,6 +9,7 @@ using Entidades.Administracion;
 using SqlDataAccess.Utils;
 using System.Data;
 using DataAccess.Administracion;
+using SqlDataAccess.Administracion;
 
 namespace SqlDataAccess.Seguridad
 {
@@ -17,14 +18,16 @@ namespace SqlDataAccess.Seguridad
         string remoteAddress { get; set; }
 
         ConsultasSQL sql = new ConsultasSQL();
+        IAppMenuDAO appmenuDAO = new AppMenuDAO();
 
         public SeguridadDAO(string remoteAddress)
         {
             this.remoteAddress = remoteAddress;
         }
 
-        public string authenticateUser(string userName, string password, out List<string> transacciones)
+        public string authenticateUser(string userName, string password, out List<string> transacciones, out int rolid)
         {
+            rolid = 0;
             string mensaje = string.Empty;
             var retValue = string.Empty;
             var loginHelper = new Usuario();
@@ -54,7 +57,16 @@ namespace SqlDataAccess.Seguridad
                         {
                             if (usuario.Clave == GetStringSha256Hash(password))
                             {
-                                transacciones = new List<string>() { "2200", "2201"}; ;// leerTransacciones(roles);
+                                List<AppMenu> menus = appmenuDAO.getAllbyRol(usuario.RolID, ref mensaje);
+                                if(mensaje == "OK")
+                                {
+                                    transacciones = new List<string>();
+                                    foreach (AppMenu menu in menus)
+                                    {
+                                        transacciones.Add(menu.VistaID);
+                                    }
+                                    rolid = usuario.RolID;
+                                }
                             }
                             else
                                 mensaje = "La clave o contraseña es incorrecta";
@@ -121,7 +133,7 @@ namespace SqlDataAccess.Seguridad
 
             foreach (var menu in menus)
             {
-                result.Add(menu.Id.ToString());
+                result.Add(menu.VistaID.ToString());
             }
 
             return result;

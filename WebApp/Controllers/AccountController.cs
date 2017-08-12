@@ -90,8 +90,8 @@ namespace WebApp.Controllers
 
                 ISeguridadDAO securityDao = new SeguridadDAO(Request.UserHostAddress);
                 var transacciones = new List<string>();
-
-                var resultadoLogin = securityDao.authenticateUser(model.Email, model.Password, out transacciones);
+                int rolid;
+                var resultadoLogin = securityDao.authenticateUser(model.Email, model.Password, out transacciones, out rolid);
                 if (resultadoLogin != "OK")
                 {
                     ModelState.AddModelError("", resultadoLogin);
@@ -100,7 +100,7 @@ namespace WebApp.Controllers
                 {
                     if (transacciones.Count > 0)
                     {
-                        var claims = GetClaims(model, Request, transacciones);
+                        var claims = GetClaims(model, Request, transacciones, rolid);
                         if (claims != null)
                         {
                             SignIn(claims);
@@ -423,7 +423,10 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            if (User.Identity.IsAuthenticated)
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -455,14 +458,15 @@ namespace WebApp.Controllers
             base.Dispose(disposing);
         }
 
-        private List<Claim> GetClaims(LoginViewModel model, HttpRequestBase request, List<string> roles)
+        private List<Claim> GetClaims(LoginViewModel model, HttpRequestBase request, List<string> roles, int rolid)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, model.Email),
                 new Claim(AppIdentity.IPClaimType, request.UserHostAddress),
                 new Claim(ClaimTypes.Name, model.Email),
-                new Claim(AppIdentity.RolesClaimType, string.Join(",", roles))
+                new Claim(AppIdentity.RolesClaimType, string.Join(",", roles)),
+                new Claim("RolID", rolid.ToString())
             };
             return claims;
         }

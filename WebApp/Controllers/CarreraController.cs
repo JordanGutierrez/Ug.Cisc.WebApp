@@ -15,6 +15,7 @@ namespace WebApp.Controllers
         IFacultadDAO facultadDAO = new FacultadDAO();
 
         // GET: Carrera
+        [AppAuthorize("00003")]
         public ActionResult Index()
         {
             string mensaje = string.Empty;
@@ -46,16 +47,21 @@ namespace WebApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    ModelState.AddModelError("", "Datos Enviados Incorrectos");
+                    return View(carrera);
+                }
                 string mensaje = string.Empty;
                 carreraDAO.insertCarrera(carrera, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");
                 else
-                    return View();
+                    return View(carrera);
             }
             catch (Exception ex)
             {
-                return View();
+                return View(carrera);
             }
         }
 

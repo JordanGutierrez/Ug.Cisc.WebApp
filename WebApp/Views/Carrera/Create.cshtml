@@ -12,7 +12,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("Create", "Carrera", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                 {
                     @Html.AntiForgeryToken()
 
