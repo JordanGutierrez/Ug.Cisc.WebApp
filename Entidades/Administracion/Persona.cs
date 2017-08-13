@@ -16,6 +16,8 @@ namespace Entidades.Administracion
         [DisplayName("Código")]
         public int PersonaID { get; set; }
 
+        public int UsuarioID { get; set; }
+
         [Required]
         public int RolID { get; set; }
 
@@ -89,6 +91,7 @@ namespace Entidades.Administracion
             Persona persona = new Persona();
 
             persona.PersonaID = int.Parse(dr["PersonaID"].ToString());
+            persona.UsuarioID = int.Parse(dr["UsuarioID"].ToString());
             persona.RolID = int.Parse(dr["RolID"].ToString());
             persona.TipoIdentificacionID = int.Parse(dr["TipoIdentificacionID"].ToString());
             persona.NumeroIdentificacion = dr["NumeroIdentificacion"].ToString();

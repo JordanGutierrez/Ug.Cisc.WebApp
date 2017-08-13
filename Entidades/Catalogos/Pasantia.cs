@@ -22,6 +22,5 @@ namespace Entidades.Catalogos
 
             return pasantia;
         }
-
     }
 }

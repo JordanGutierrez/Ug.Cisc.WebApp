@@ -1,5 +1,6 @@
 ﻿using DataAccess.Administracion;
 using Entidades.Administracion;
+using Entidades.Utils;
 using SqlDataAccess.Administracion;
 using SqlDataAccess.Seguridad;
 using System;
@@ -32,5 +33,43 @@ namespace WebApp.Controllers
             }
             return null;
         }
+
+        public void Success(string message, string titulo, bool dismissable = false)
+        {
+            AddAlert(AlertStyles.Success, message, titulo, dismissable);
+        }
+
+        public void Information(string message, string titulo, bool dismissable = false)
+        {
+            AddAlert(AlertStyles.Information, message, titulo, dismissable);
+        }
+
+        public void Warning(string message, string titulo, bool dismissable = false)
+        {
+            AddAlert(AlertStyles.Warning, message, titulo, dismissable);
+        }
+
+        public void Danger(string message, string titulo, bool dismissable = false)
+        {
+            AddAlert(AlertStyles.Danger, message, titulo, dismissable);
+        }
+
+        private void AddAlert(string alertStyle, string message, string titulo, bool dismissable)
+        {
+            var alerts = TempData.ContainsKey(Alert.TempDataKey)
+                ? (List<Alert>)TempData[Alert.TempDataKey]
+                : new List<Alert>();
+
+            alerts.Add(new Alert
+            {
+                AlertStyle = alertStyle,
+                Message = message,
+                Dismissable = dismissable,
+                Titulo = titulo
+            });
+
+            TempData[Alert.TempDataKey] = alerts;
+        }
+
     }
 }

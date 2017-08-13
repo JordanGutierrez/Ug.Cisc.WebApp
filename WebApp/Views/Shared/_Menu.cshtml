@@ -11,7 +11,10 @@
             <ul class="nav child_menu">
                 @foreach (AppMenu hijo in Model.Where(y => y.PadreID == padre.VistaID))
                 {
-                <li><a href="@Url.Action(hijo.Vista,hijo.Controlador)">@hijo.Titulo</a></li>
+                    if (hijo.Orden > 0)
+                    {
+                        <li><a href="@Url.Action(hijo.Vista,hijo.Controlador)">@hijo.Titulo</a></li>
+                    }
                 }
             </ul>
         </li>

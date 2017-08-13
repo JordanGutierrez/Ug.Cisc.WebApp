@@ -9,6 +9,8 @@ namespace Entidades.Administracion
 {
     public class Usuario
     {
+        public int UsuarioID { get; set; }
+
         public string UserName { get; set; }
 
         public string Clave { get; set; }
@@ -25,6 +27,7 @@ namespace Entidades.Administracion
         {
             Usuario usuario = new Usuario();
 
+            usuario.UsuarioID = int.Parse(dr["UsuarioID"].ToString());
             usuario.UserName = dr["Alias"].ToString();
             usuario.Clave = dr["Clave"].ToString();
             usuario.Estado = bool.Parse(dr["Estado"].ToString());

@@ -13,6 +13,8 @@ namespace DataAccess.Administracion
 
         Persona getPersona(int id, ref string mensaje);
 
+        Persona getPersonabyUser(int user, ref string mensaje);
+
         void insertPersona(Persona persona, string usuario, ref string mensaje);
 
         void updatePersona(Persona persona, string usuario, ref string mensaje);

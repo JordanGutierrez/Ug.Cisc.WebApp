@@ -8,6 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Entidades.Catalogos;
+using DataAccess.Catalogos;
+using SqlDataAccess.Catalogos;
 
 namespace WebApp.Controllers
 {
@@ -15,6 +18,8 @@ namespace WebApp.Controllers
     {
         IPersonaDAO personaDAO = new PersonaDAO();
         ICarreraDAO carreraDAO = new CarreraDAO();
+        ITipoIdentificacionDAO tipoidentificacionDAO = new TipoIdentificacionDAO();
+
         public string Descrimage { get; set; }
 
         // GET: Pasante
@@ -35,6 +40,7 @@ namespace WebApp.Controllers
             List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
             Persona persona = new Persona();
             persona.RolID = 1;
+            ViewBag.TiposIdentificacion = tipoidentificacionDAO.getAllTipoIdentificacion(ref mensaje);
             ViewBag.Carreras = carreras.Where(c => c.Estado);
             return View(persona);
         }
@@ -43,14 +49,25 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Create(Persona persona)
         {
+            string mensaje = string.Empty;
+            List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
+            ViewBag.Carreras = carreras.Where(c => c.Estado);
+            ViewBag.TiposIdentificacion = tipoidentificacionDAO.getAllTipoIdentificacion(ref mensaje);
             try
             {
-                string mensaje = string.Empty;
+                if (!Utils.Utils.esCedulaValida(persona.NumeroIdentificacion))
+                {
+                    Warning("Número de identificación inválido", "Pasante", true);
+                    return View(persona);
+                }
                 personaDAO.insertPersona(persona, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
+                {
+                    Success("Pasante registrado con éxito", "Pasante", true);
                     return RedirectToAction("Index");
+                }
                 else
-                    return View();
+                    return View(persona);
             }
             catch
             {
@@ -66,6 +83,7 @@ namespace WebApp.Controllers
             List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
             persona = personaDAO.getPersona(id, ref mensaje);
             ViewBag.Carreras = carreras.Where(c => c.Estado);
+            ViewBag.TiposIdentificacion = tipoidentificacionDAO.getAllTipoIdentificacion(ref mensaje);
             return View(persona);
         }
 
@@ -76,6 +94,9 @@ namespace WebApp.Controllers
             try
             {
                 string mensaje = string.Empty;
+                List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
+                ViewBag.Carreras = carreras.Where(c => c.Estado);
+                ViewBag.TiposIdentificacion = tipoidentificacionDAO.getAllTipoIdentificacion(ref mensaje);
                 personaDAO.updatePersona(persona, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
                     return RedirectToAction("Index");

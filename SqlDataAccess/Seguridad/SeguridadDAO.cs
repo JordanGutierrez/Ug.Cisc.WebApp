@@ -19,15 +19,16 @@ namespace SqlDataAccess.Seguridad
 
         ConsultasSQL sql = new ConsultasSQL();
         IAppMenuDAO appmenuDAO = new AppMenuDAO();
+        IPersonaDAO personaDAO = new PersonaDAO();
 
         public SeguridadDAO(string remoteAddress)
         {
             this.remoteAddress = remoteAddress;
         }
 
-        public string authenticateUser(string userName, string password, out List<string> transacciones, out int rolid)
+        public string authenticateUser(string userName, string password, out List<string> transacciones, out Persona persona)
         {
-            rolid = 0;
+            persona = null;
             string mensaje = string.Empty;
             var retValue = string.Empty;
             var loginHelper = new Usuario();
@@ -65,7 +66,7 @@ namespace SqlDataAccess.Seguridad
                                     {
                                         transacciones.Add(menu.VistaID);
                                     }
-                                    rolid = usuario.RolID;
+                                     persona = personaDAO.getPersonabyUser(usuario.UsuarioID, ref mensaje);
                                 }
                             }
                             else

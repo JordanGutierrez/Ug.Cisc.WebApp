@@ -9,7 +9,7 @@ namespace DataAccess.Seguridad
 {
     public interface ISeguridadDAO
     {
-        string authenticateUser(string userName, string password, out List<string> transacciones, out int rolid);
+        string authenticateUser(string userName, string password, out List<string> transacciones, out Persona persona);
 
         Usuario getUsuario(string alias, ref string mensaje);
 

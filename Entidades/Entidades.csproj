@@ -86,7 +86,9 @@
     <Compile Include="Administracion\AppIdentity.cs" />
     <Compile Include="Administracion\Usuario.cs" />
     <Compile Include="Catalogos\Pasantia.cs" />
+    <Compile Include="Catalogos\TipoIdentificacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Alert.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

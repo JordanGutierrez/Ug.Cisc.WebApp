@@ -78,7 +78,7 @@ namespace WebApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult  Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!Request.IsAuthenticated)
             {
@@ -90,8 +90,8 @@ namespace WebApp.Controllers
 
                 ISeguridadDAO securityDao = new SeguridadDAO(Request.UserHostAddress);
                 var transacciones = new List<string>();
-                int rolid;
-                var resultadoLogin = securityDao.authenticateUser(model.Email, model.Password, out transacciones, out rolid);
+                Persona persona;
+                var resultadoLogin = securityDao.authenticateUser(model.Email, model.Password, out transacciones, out persona);
                 if (resultadoLogin != "OK")
                 {
                     ModelState.AddModelError("", resultadoLogin);
@@ -100,7 +100,8 @@ namespace WebApp.Controllers
                 {
                     if (transacciones.Count > 0)
                     {
-                        var claims = GetClaims(model, Request, transacciones, rolid);
+                        string faceid = await Utils.Utils.getFaceID(persona.Foto);
+                        var claims = GetClaims(model, Request, transacciones, persona, (string)faceid);
                         if (claims != null)
                         {
                             SignIn(claims);
@@ -117,10 +118,8 @@ namespace WebApp.Controllers
             }
             else
             {
-                //Warning("Existe una sesión activa, debe cerrar sesión primero", true);
                 return RedirectToAction("Index", "Home");
             }
-
         }
 
         //
@@ -458,7 +457,7 @@ namespace WebApp.Controllers
             base.Dispose(disposing);
         }
 
-        private List<Claim> GetClaims(LoginViewModel model, HttpRequestBase request, List<string> roles, int rolid)
+        private List<Claim> GetClaims(LoginViewModel model, HttpRequestBase request, List<string> roles, Persona persona, string faceid)
         {
             var claims = new List<Claim>
             {
@@ -466,7 +465,9 @@ namespace WebApp.Controllers
                 new Claim(AppIdentity.IPClaimType, request.UserHostAddress),
                 new Claim(ClaimTypes.Name, model.Email),
                 new Claim(AppIdentity.RolesClaimType, string.Join(",", roles)),
-                new Claim("RolID", rolid.ToString())
+                new Claim("RolID", persona.RolID.ToString()),
+                new Claim("FaceID", faceid)
+
             };
             return claims;
         }

@@ -136,5 +136,29 @@ namespace SqlDataAccess.Administracion
                 mensaje = ex.Message;
             }
         }
+
+        public Persona getPersonabyUser(int user, ref string mensaje)
+        {
+            Persona persona = new Persona();
+            sql = new ConsultasSQL();
+            sql.Comando.CommandType = CommandType.StoredProcedure;
+            sql.Comando.CommandText = "pa_getPersonabyUser";
+            sql.Comando.Parameters.AddWithValue("@UsuarioID", user);
+
+            try
+            {
+                IDataReader reader = sql.EjecutaReader(ref mensaje);
+                while (reader.Read())
+                {
+                    persona = Persona.CreatePersonaFromDataRecord(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+            }
+
+            return persona;
+        }
     }
 }

@@ -1,0 +1,39 @@
+﻿@{
+    var alerts = TempData.ContainsKey(Entidades.Utils.Alert.TempDataKey)
+                ? (List<Entidades.Utils.Alert>)TempData[Entidades.Utils.Alert.TempDataKey]
+                : new List<Entidades.Utils.Alert>();
+}
+@{if (alerts.Any())
+    {
+        foreach (var item in alerts)
+        {
+            switch (item.AlertStyle)
+            {
+                case Entidades.Utils.AlertStyles.Warning:
+                    <div class="alert alert-warning alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>¡ADVERTENCIA!</strong> @item.Message
+                    </div>
+                    break;
+                case Entidades.Utils.AlertStyles.Danger:
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>¡ERROR!</strong> @item.Message
+                    </div>
+                    break;
+                case Entidades.Utils.AlertStyles.Success:
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>¡ÉXITO!</strong> @item.Message
+                    </div>
+                    break;
+                case Entidades.Utils.AlertStyles.Information:
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>¡ATENTO!</strong> @item.Message
+                    </div>
+                    break;
+            }
+        }
+    }
+}

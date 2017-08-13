@@ -22,6 +22,8 @@ $(document).ready(function () {
     })
 });
 
+$(".alert").fadeIn(1000).delay(3000).fadeOut(1000);
+
 var ConsultarPasante = function (value, callback) {
     $.ajax({
         url: '../../Pasante/ConsultarPasante',
@@ -40,10 +42,6 @@ var ConsultarPasante = function (value, callback) {
             alert('error');
         }
     })
-}
-
-var MostrarPasantes = function() {
-    $("#ModalPasantes").modal("show");
 }
 
 var ConsultarTutor = function (value, callback) {
@@ -66,10 +64,6 @@ var ConsultarTutor = function (value, callback) {
     })
 }
 
-var MostrarTutores = function () {
-    $("#ModalTutores").modal("show");
-}
-
 var ConsultarInstitucion = function (value, callback) {
     $.ajax({
         url: '../../Institucion/ConsultarInstitucion',
@@ -88,8 +82,4 @@ var ConsultarInstitucion = function (value, callback) {
             alert('error');
         }
     })
-}
-
-var MostrarInstituciones = function () {
-    $("#ModalInstituciones").modal("show");
 }

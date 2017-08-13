@@ -55,7 +55,10 @@ namespace WebApp.Controllers
                 string mensaje = string.Empty;
                 carreraDAO.insertCarrera(carrera, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
+                {
+                    Success("Carrera registrada con éxito", "Carrera", true);
                     return RedirectToAction("Index");
+                }
                 else
                     return View(carrera);
             }
