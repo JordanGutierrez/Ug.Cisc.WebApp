@@ -100,7 +100,7 @@ namespace WebApp.Controllers
                 {
                     if (transacciones.Count > 0)
                     {
-                        string faceid = await Utils.Utils.getFaceID(persona.Foto);
+                        string faceid = "";// await Utils.Utils.getFaceID(persona.Foto);
                         var claims = GetClaims(model, Request, transacciones, persona, (string)faceid);
                         if (claims != null)
                         {
@@ -466,7 +466,7 @@ namespace WebApp.Controllers
                 new Claim(ClaimTypes.Name, model.Email),
                 new Claim(AppIdentity.RolesClaimType, string.Join(",", roles)),
                 new Claim("RolID", persona.RolID.ToString()),
-                new Claim("FaceID", faceid)
+                //new Claim("FaceID", faceid)
 
             };
             return claims;
