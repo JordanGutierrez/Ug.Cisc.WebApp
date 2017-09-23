@@ -14,6 +14,8 @@
     <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- Datatables-->
     <link href="../../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.custom.min.css" rel="stylesheet">
     <!--Custom Theme Style -->
     <link href="../../Content/custom.min.css" rel="stylesheet">
 </head>
@@ -129,7 +131,6 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 <br />
-                @{Html.RenderPartial("_Alerts"); }
                 <div class="">
                     @RenderBody()
                 </div>
@@ -151,7 +152,6 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/fileUpload")
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="../../Scripts/Layout.js"></script>
     <!-- FastClick -->
     <script src="../../../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
@@ -161,9 +161,13 @@
     <!-- Datatables -->
     <script src="../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-
+    <!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.custom.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../../Scripts/custom.min.js"></script>
+    <script src="../../Scripts/Layout.js"></script>
+
     @RenderSection("scripts", required: false)
+    @{Html.RenderPartial("_Alerts"); }
 </body>
 </html>

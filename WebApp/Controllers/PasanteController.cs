@@ -91,21 +91,30 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Persona persona)
         {
+            string mensaje = string.Empty;
+
+            List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
+            ViewBag.Carreras = carreras.Where(c => c.Estado);
+            ViewBag.TiposIdentificacion = tipoidentificacionDAO.getAllTipoIdentificacion(ref mensaje);
+
             try
             {
-                string mensaje = string.Empty;
-                List<Carrera> carreras = carreraDAO.getAllCarrera(ref mensaje);
-                ViewBag.Carreras = carreras.Where(c => c.Estado);
-                ViewBag.TiposIdentificacion = tipoidentificacionDAO.getAllTipoIdentificacion(ref mensaje);
                 personaDAO.updatePersona(persona, GetApplicationUser(), ref mensaje);
                 if (mensaje == "OK")
+                {
+                    Success("Pasante Registrado con éxito", "Pasante", true);
                     return RedirectToAction("Index");
+                }
                 else
-                    return View();
+                {
+                    Warning(mensaje, "Pasante", true);
+                    return View(persona);
+                }
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                Danger(ex.Message, "Pasante", true);
+                return View(persona);
             }
         }
 

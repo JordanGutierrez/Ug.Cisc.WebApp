@@ -42,15 +42,20 @@ namespace WebApp.Controllers
                 string mensaje = string.Empty;
                 facultadDAO.insertFacultad(facultad, GetApplicationUser(),ref mensaje);
                 if (mensaje == "OK")
+                {
+                    Success("Facultad registrada exitósamente", "Facultad", true);
                     return RedirectToAction("Index");
+                }
                 else
                 {
+                    Warning(mensaje, "Facultad", true);
                     return View(facultad);
                 }
             }
             catch(Exception ex)
             {
-                return View();
+                Danger(ex.Message, "Facultad", true);
+                return View(facultad);
             }
         }
 

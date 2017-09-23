@@ -17,7 +17,6 @@ namespace WebApp.Controllers
         IPasantiaDAO pasantiaDAO = new PasantiaDAO();
 
         // GET: Proceso
-        [AppAuthorize("00005")]
         public ActionResult Index()
         {
             string mensaje = string.Empty;
@@ -29,7 +28,6 @@ namespace WebApp.Controllers
         }
 
         // GET: Proceso/Create
-        [AppAuthorize("00006")]
         public ActionResult Create()
         {
             string mensaje = string.Empty;
@@ -38,7 +36,6 @@ namespace WebApp.Controllers
         }
 
         // POST: Proceso/Create
-        [AppAuthorize("00006")]
         [HttpPost]
         public ActionResult Create(Proceso proceso)
         {

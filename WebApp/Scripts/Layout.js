@@ -5,6 +5,8 @@
     };
 })(jQuery, moment);
 
+PNotify.removeAll();
+
 $(document).ready(function () {
     $('.date').datetimepicker({
         viewMode: 'days',
@@ -21,8 +23,6 @@ $(document).ready(function () {
         }
     })
 });
-
-$(".alert").fadeIn(1000).delay(3000).fadeOut(1000);
 
 var ConsultarPasante = function (value, callback) {
     $.ajax({
